@@ -1,21 +1,21 @@
 export interface Product {
   id: string;
-  title: string;
-  category: string;
+  slug: string;
 
+  name: string;
+  category: string;
   description: string;
 
   price: number;
 
   rating: number;
-
-  reviews: number;
+  reviewCount: number;
 
   image: string;
 
   isNew?: boolean;
-
   isBestSeller?: boolean;
+  isSale?: boolean;
 
   inStock: boolean;
 }
