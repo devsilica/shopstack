@@ -1,17 +1,10 @@
 import { Button } from "@/components/ui/button";
 
-interface QuickViewButtonProps {
-  onClick?: () => void;
-}
-
-export default function QuickViewButton({
-  onClick,
-}: QuickViewButtonProps) {
+export default function QuickViewButton() {
   return (
     <Button
-      variant="outline"
-      className="w-full rounded-full"
-      onClick={onClick}
+      className="rounded-full"
+      size="sm"
     >
       Quick View
     </Button>

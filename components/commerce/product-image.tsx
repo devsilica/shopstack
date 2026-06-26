@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 
 interface ProductImageProps {
@@ -11,18 +10,17 @@ export default function ProductImage({
   alt,
 }: ProductImageProps) {
   return (
-    <div className="relative aspect-square overflow-hidden rounded-3xl bg-neutral-100">
+    <div className="group relative aspect-[4/5] overflow-hidden rounded-[28px] bg-neutral-100">
       <Image
         src={src}
         alt={alt}
         fill
-        className="object-cover transition-transform duration-500 hover:scale-105"
+        sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 25vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-110"
       />
     </div>
   );
 }
-
-
 
 
 

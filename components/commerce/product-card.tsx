@@ -4,10 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import ProductImage from "./product-image";
 import ProductBadge from "./product-badge";
-import Rating from "./rating";
 import ProductPrice from "./product-price";
+import Rating from "./rating";
 import WishlistButton from "./wishlist-button";
-import QuickViewButton from "./quick-view-button";
 
 import { Product } from "@/types/product";
 
@@ -19,41 +18,45 @@ export default function ProductCard({
   product,
 }: ProductCardProps) {
   return (
-    <Card className="overflow-hidden rounded-3xl border-0 shadow-none">
-      <CardContent className="space-y-5 p-0">
+    <Card className="group overflow-hidden rounded-[28px] border-0 bg-transparent shadow-none">
+      <CardContent className="p-0">
 
-        <div className="relative">
+        <div className="relative overflow-hidden rounded-[28px]">
 
-          <ProductImage
-            src={product.image}
-            alt={product.name}
-          />
+          <Link href={`/products/${product.slug}`}>
+            <ProductImage
+              src={product.image}
+              alt={product.name}
+            />
+          </Link>
 
-          <div className="absolute left-4 top-4">
-            {product.isBestSeller && (
-              <ProductBadge label="Best Seller" />
-            )}
+          <div className="absolute left-5 top-5 flex gap-2">
 
             {product.isNew && (
               <ProductBadge label="New" />
             )}
+
+            {product.isBestSeller && (
+              <ProductBadge label="Best Seller" />
+            )}
+
           </div>
 
-          <div className="absolute right-4 top-4">
-            <WishlistButton />
+          <div className="absolute right-5 top-5 opacity-0 transition-all duration-300 group-hover:opacity-100">
+            <WishlistButton product={product} />
           </div>
 
         </div>
 
-        <div className="space-y-3 px-2">
+        <div className="mt-6 space-y-3">
 
-          <p className="text-sm uppercase tracking-wide text-neutral-500">
+          <p className="text-sm uppercase tracking-[0.25em] text-neutral-500">
             {product.category}
           </p>
 
           <Link
             href={`/products/${product.slug}`}
-            className="block text-xl font-semibold"
+            className="block text-2xl font-semibold transition-colors hover:text-neutral-600"
           >
             {product.name}
           </Link>
@@ -66,8 +69,6 @@ export default function ProductCard({
           <ProductPrice
             price={product.price}
           />
-
-          <QuickViewButton />
 
         </div>
 
