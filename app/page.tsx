@@ -1,14 +1,29 @@
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import Newsletter from "@/components/layout/newsletter";
+
+import Hero from "@/components/marketing/hero";
+import FeaturedCollections from "@/components/marketing/featured-collections";
+import TrendingProducts from "@/components/marketing/trending-products";
+import EditorialBanner from "@/components/marketing/editorial-banner";
+import BestSellers from "@/components/marketing/best-sellers";
 
 export default function Home() {
   return (
     <>
       <Navbar />
 
-      <main className="min-h-screen flex items-center justify-center">
-        <h1 className="text-5xl font-bold">ShopStack</h1>
-      </main>
+      <Hero />
+
+      <FeaturedCollections />
+
+      <TrendingProducts />
+
+      <EditorialBanner />
+
+      <BestSellers />
+
+      <Newsletter />
 
       <Footer />
     </>

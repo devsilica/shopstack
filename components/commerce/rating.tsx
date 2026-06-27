@@ -2,18 +2,18 @@ import { Star } from "lucide-react";
 
 interface RatingProps {
   rating: number;
-  reviews: number;
+  reviewCount: number;
 }
 
 export default function Rating({
   rating,
-  reviews,
+  reviewCount,
 }: RatingProps) {
   return (
     <div className="flex items-center gap-2">
       <Star
         size={16}
-        className="fill-black text-black"
+        className="fill-yellow-400 text-yellow-400"
       />
 
       <span className="text-sm font-medium">
@@ -21,7 +21,7 @@ export default function Rating({
       </span>
 
       <span className="text-sm text-neutral-500">
-        ({reviews})
+        ({reviewCount})
       </span>
     </div>
   );

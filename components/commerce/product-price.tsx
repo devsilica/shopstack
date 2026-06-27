@@ -6,8 +6,10 @@ export default function ProductPrice({
   price,
 }: ProductPriceProps) {
   return (
-    <p className="text-lg font-semibold">
-      ${price}
-    </p>
+    <div className="flex items-center gap-2">
+      <span className="text-2xl font-semibold tracking-tight">
+        ${price}
+      </span>
+    </div>
   );
 }

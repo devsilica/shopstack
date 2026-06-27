@@ -1,21 +1,40 @@
 export interface Product {
   id: string;
-  title: string;
-  category: string;
+  slug: string;
 
+  name: string;
+  category: string;
+  brand: string;
   description: string;
 
   price: number;
 
   rating: number;
+  reviewCount: number;
 
-  reviews: number;
-
+  // Main image (kept for backward compatibility)
   image: string;
 
-  isNew?: boolean;
+  // Product gallery
+  images: string[];
 
-  isBestSeller?: boolean;
+  // Product options
+  colors: string[];
+  sizes: string[];
 
+  // Inventory
   inStock: boolean;
+  stock: number;
+  sku: string;
+
+  // Specifications
+  material: string;
+  dimensions: string;
+  weight: string;
+  features: string[];
+
+  // Product badges
+  isNew?: boolean;
+  isBestSeller?: boolean;
+  isSale?: boolean;
 }
