@@ -154,9 +154,9 @@ export default function Navbar() {
             </CartSheet>
 
             <Avatar>
-              <AvatarImage src="/images/avatars/user-1.jpg" />
+              <AvatarImage src="/images/avatars/user1.png" />
               <AvatarFallback>
-                SS
+            
               </AvatarFallback>
             </Avatar>
 
