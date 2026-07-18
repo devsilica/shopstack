@@ -9,17 +9,16 @@ interface CartStore {
   items: CartItem[];
 
   addToCart: (product: Product) => void;
-
   removeFromCart: (id: string) => void;
-
   increaseQuantity: (id: string) => void;
-
   decreaseQuantity: (id: string) => void;
-
   clearCart: () => void;
+
+  getTotalItems: () => number;
+  getSubtotal: () => number;
 }
 
-export const useCartStore = create<CartStore>((set) => ({
+export const useCartStore = create<CartStore>((set, get) => ({
   items: [],
 
   addToCart: (product) =>
@@ -85,5 +84,21 @@ export const useCartStore = create<CartStore>((set) => ({
         .filter((item) => item.quantity > 0),
     })),
 
-  clearCart: () => set({ items: [] }),
+  clearCart: () =>
+    set({
+      items: [],
+    }),
+
+  getTotalItems: () =>
+    get().items.reduce(
+      (total, item) => total + item.quantity,
+      0
+    ),
+
+  getSubtotal: () =>
+    get().items.reduce(
+      (total, item) =>
+        total + item.price * item.quantity,
+      0
+    ),
 }));

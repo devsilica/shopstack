@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2 } from "lucide-react";
 
 import ProductPrice from "@/components/commerce/product-price";
+import { Button } from "@/components/ui/button";
 
-import { useCartStore } from "@/store/cart-store";
 import { Product } from "@/types/product";
+import { useCartStore } from "@/store/cart-store";
 
 interface CartItemProps {
   product: Product & {
@@ -24,8 +25,7 @@ export default function CartItem({
   } = useCartStore();
 
   return (
-    <div className="flex gap-6 rounded-3xl border p-5">
-
+    <div className="flex gap-6 rounded-3xl border p-6">
       <div className="relative h-32 w-32 overflow-hidden rounded-2xl">
         <Image
           src={product.image}
@@ -36,63 +36,52 @@ export default function CartItem({
       </div>
 
       <div className="flex flex-1 flex-col justify-between">
+        <div>
+          <p className="text-sm uppercase tracking-[0.2em] text-neutral-500">
+            {product.category}
+          </p>
 
-        <div className="flex items-start justify-between">
+          <h3 className="mt-2 text-2xl font-semibold">
+            {product.name}
+          </h3>
 
-          <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-neutral-500">
-              {product.category}
-            </p>
-
-            <h3 className="mt-2 text-2xl font-semibold">
-              {product.name}
-            </h3>
+          <div className="mt-4">
+            <ProductPrice price={product.price} />
           </div>
-
-          <button
-            onClick={() => removeFromCart(product.id)}
-            className="text-red-500 transition hover:text-red-700"
-          >
-            <Trash2 size={20} />
-          </button>
-
         </div>
 
-        <ProductPrice price={product.price} />
-
         <div className="mt-6 flex items-center justify-between">
-
           <div className="flex items-center gap-3">
-
-            <button
+            <Button
+              variant="outline"
+              size="icon"
               onClick={() => decreaseQuantity(product.id)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border"
             >
-              −
-            </button>
+              <Minus className="h-4 w-4" />
+            </Button>
 
-            <span className="text-lg font-semibold">
+            <span className="w-8 text-center font-semibold">
               {product.quantity}
             </span>
 
-            <button
+            <Button
+              variant="outline"
+              size="icon"
               onClick={() => increaseQuantity(product.id)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border"
             >
-              +
-            </button>
-
+              <Plus className="h-4 w-4" />
+            </Button>
           </div>
 
-          <h3 className="text-xl font-semibold">
-            $
-            {(product.price * product.quantity).toFixed(2)}
-          </h3>
-
+          <Button
+            variant="destructive"
+            size="icon"
+            onClick={() => removeFromCart(product.id)}
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
         </div>
-
       </div>
-
     </div>
   );
 }

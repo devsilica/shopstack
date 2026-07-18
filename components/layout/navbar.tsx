@@ -1,14 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Heart, Search, ShoppingBag } from "lucide-react";
 
 import Container from "./container";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+
 import { useWishlistStore } from "@/store/wishlist-store";
 import { useCartStore } from "@/store/cart-store";
+
+import CartSheet from "@/components/cart/cart-sheet";
 
 import {
   Avatar,
@@ -25,6 +29,7 @@ export default function Navbar() {
   );
 
   const { items: wishlistItems } = useWishlistStore();
+
   const wishlistCount = wishlistItems.length;
 
   return (
@@ -67,9 +72,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
 
             <div className="hidden w-72 lg:block">
-              <Input
-                placeholder="Search products..."
-              />
+              <Input placeholder="Search products..." />
             </div>
 
             <Button
@@ -79,47 +82,81 @@ export default function Navbar() {
               <Search size={20} />
             </Button>
 
-<Button
-  variant="ghost"
-  size="icon"
-  asChild
->
-  <Link
-    href="/wishlist"
-    className="relative"
-  >
-    <Heart size={20} />
+            {/* Wishlist */}
 
-    {wishlistCount > 0 && (
-      <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[11px] font-semibold text-white">
-        {wishlistCount}
-      </span>
-    )}
-  </Link>
-</Button>
             <Button
               variant="ghost"
               size="icon"
               asChild
             >
               <Link
-                href="/cart"
+                href="/wishlist"
+                className="relative"
+              >
+                <Heart size={20} />
+
+                {wishlistCount > 0 && (
+                  <motion.span
+                    key={wishlistCount}
+                    initial={{
+                      scale: 0.5,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      scale: [1.4, 1],
+                      opacity: 1,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 18,
+                    }}
+                    className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[11px] font-semibold text-white"
+                  >
+                    {wishlistCount}
+                  </motion.span>
+                )}
+              </Link>
+            </Button>
+
+            {/* Cart */}
+
+            <CartSheet>
+              <Button
+                variant="ghost"
+                size="icon"
                 className="relative"
               >
                 <ShoppingBag size={20} />
 
                 {cartCount > 0 && (
-                  <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-[11px] font-semibold text-white">
+                  <motion.span
+                    key={cartCount}
+                    initial={{
+                      scale: 0.5,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      scale: [1.4, 1],
+                      opacity: 1,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 18,
+                    }}
+                    className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-[11px] font-semibold text-white"
+                  >
                     {cartCount}
-                  </span>
+                  </motion.span>
                 )}
-              </Link>
-            </Button>
+              </Button>
+            </CartSheet>
 
             <Avatar>
-              <AvatarImage src="/images/avatars/user-1.jpg" />
+              <AvatarImage src="/images/avatars/user1.png" />
               <AvatarFallback>
-                SS
+            
               </AvatarFallback>
             </Avatar>
 
